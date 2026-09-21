@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Callio — Real-Time Calling & Video PWA</title>
+  <meta name="description" content="Next-gen real-time audio and video calling directly from your browser." />
+  <meta name="theme-color" content="#0B0F19" />
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System & 3D Tactile Styling -->
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="bg-dark text-light antialiased">
+  
+  <!-- App Container -->
+  <div id="app" class="d-flex flex-column min-vh-100 position-relative">
+    
+    <!-- Top Navigation Header -->
+    <header id="main-header" class="callio-nav border-bottom border-dark-subtle sticky-top backdrop-blur display-none">
+      <div class="container-fluid px-3 px-md-4 py-2 d-flex align-items-center justify-content-between">
+        
+        <a href="#/friends" class="d-flex align-items-center gap-2 text-decoration-none text-light">
+          <div class="brand-logo-3d">
+            <i class="bi bi-telephone-fill"></i>
+          </div>
+          <span class="brand-title">Callio</span>
+        </a>
+
+        <!-- Navigation Tabs -->
+        <nav class="d-none d-md-flex align-items-center gap-2">
+          <a href="#/friends" class="nav-tab-btn" data-tab="friends">
+            <i class="bi bi-people-fill me-1"></i> Friends
+          </a>
+          <a href="#/search" class="nav-tab-btn" data-tab="search">
+            <i class="bi bi-search me-1"></i> Discover
+          </a>
+          <a href="#/history" class="nav-tab-btn" data-tab="history">
+            <i class="bi bi-clock-history me-1"></i> Call Logs
+          </a>
+        </nav>
+
+        <!-- Current User Profile Pill & Actions -->
+        <div class="d-flex align-items-center gap-3">
+          <a href="#/profile" class="user-pill-btn d-flex align-items-center gap-2 text-decoration-none">
+            <img id="header-user-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=user" alt="Avatar" class="avatar-sm rounded-circle border border-primary" />
+            <span id="header-user-name" class="fw-semibold text-light fs-7 d-none d-sm-inline">@user</span>
+          </a>
+          <button id="btn-logout" class="btn-3d-danger btn-3d-sm" title="Log out">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content Container (SPA Views render here) -->
+    <main id="main-content" class="flex-grow-1 d-flex flex-column container-xl py-3 py-md-4 position-relative">
+      <div class="d-flex justify-content-center align-items-center flex-grow-1 py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading Callio...</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Mobile Navigation Bar -->
+    <nav id="mobile-nav" class="mobile-bottom-bar d-md-none border-top border-dark-subtle backdrop-blur display-none">
+      <div class="d-flex justify-content-around py-2">
+        <a href="#/friends" class="mobile-nav-item" data-tab="friends">
+          <i class="bi bi-people-fill"></i>
+          <span>Friends</span>
+        </a>
+        <a href="#/search" class="mobile-nav-item" data-tab="search">
+          <i class="bi bi-search"></i>
+          <span>Find</span>
+        </a>
+        <a href="#/history" class="mobile-nav-item" data-tab="history">
+          <i class="bi bi-clock-history"></i>
+          <span>Logs</span>
+        </a>
+        <a href="#/profile" class="mobile-nav-item" data-tab="profile">
+          <i class="bi bi-person-fill"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Real-time Active Call Overlay Container -->
+    <div id="call-overlay" class="call-overlay display-none"></div>
+
+    <!-- Incoming Call Modal Container -->
+    <div id="incoming-modal-container"></div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+
+  </div>
+
+  <!-- Entry Script -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

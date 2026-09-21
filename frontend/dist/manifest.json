@@ -1,0 +1,22 @@
+{
+  "short_name": "Callio",
+  "name": "Callio — Real-Time Calling & Video Calling PWA",
+  "description": "Production-quality Progressive Web App for real-time audio and video calling",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B0F19",
+  "theme_color": "#0B0F19",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}
