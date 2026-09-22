@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: callio-backend
+    env: python
+    region: ohio
+    buildCommand: "pip install -r requirements.txt && alembic upgrade head"
+    startCommand: "gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.9"
+      - key: DATABASE_URL
+        value: "postgresql://neondb_owner:npg_6JNlX8IZfGHz@ep-jolly-dust-b5x4aw3u-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require"
+      - key: JWT_SECRET
+        value: "callio_secret_jwt_key_super_secure_production_2026_change_me"
+      - key: CORS_ORIGINS
+        value: "https://callio-frontend.onrender.com"
+      - key: STUN_SERVER
+        value: "stun:stun.l.google.com:19302"
