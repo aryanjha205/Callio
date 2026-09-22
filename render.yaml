@@ -9,6 +9,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12.9"
+      - key: PYTHONPATH
+        value: "backend"
       - key: DATABASE_URL
         value: "postgresql://neondb_owner:npg_6JNlX8IZfGHz@ep-jolly-dust-b5x4aw3u-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require"
       - key: JWT_SECRET
