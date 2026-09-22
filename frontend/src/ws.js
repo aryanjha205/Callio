@@ -16,9 +16,19 @@ class WebSocketManager {
     }
 
     this.isExplicitClose = false;
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host;
-    const wsUrl = `${protocol}//${host}/ws?token=${encodeURIComponent(authState.token)}`;
+    let wsUrl;
+
+    if (import.meta.env.VITE_WS_URL) {
+      wsUrl = `${import.meta.env.VITE_WS_URL}/ws?token=${encodeURIComponent(authState.token)}`;
+    } else if (import.meta.env.VITE_API_URL) {
+      const apiUrl = new URL(import.meta.env.VITE_API_URL);
+      const wsProtocol = apiUrl.protocol === 'https:' ? 'wss:' : 'ws:';
+      wsUrl = `${wsProtocol}//${apiUrl.host}/ws?token=${encodeURIComponent(authState.token)}`;
+    } else {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.host;
+      wsUrl = `${protocol}//${host}/ws?token=${encodeURIComponent(authState.token)}`;
+    }
 
     console.log('[WebSocket] Connecting to', wsUrl);
     this.ws = new WebSocket(wsUrl);
@@ -111,7 +121,6 @@ class WebSocketManager {
       }
     }
 
-    // Dispatch to registered type listeners
     this.emit(type, msg);
   }
 

@@ -1,4 +1,5 @@
 const TOKEN_KEY = 'callio_access_token';
+const BASE_URL = import.meta.env.VITE_API_URL || '';
 
 export const authState = {
   token: localStorage.getItem(TOKEN_KEY) || null,
@@ -35,10 +36,11 @@ export async function apiFetch(endpoint, options = {}) {
     headers
   };
   
+  const fullUrl = endpoint.startsWith('http') ? endpoint : `${BASE_URL}${endpoint}`;
+
   try {
-    const res = await fetch(endpoint, config);
+    const res = await fetch(fullUrl, config);
     if (res.status === 401) {
-      // Unauthenticated -> clear token
       authState.logout();
       window.location.hash = '#/auth';
       throw new Error('Unauthorized session. Please log in.');
@@ -50,7 +52,7 @@ export async function apiFetch(endpoint, options = {}) {
     }
     return data;
   } catch (err) {
-    console.error(`API Error [${endpoint}]:`, err);
+    console.error(`API Error [${fullUrl}]:`, err);
     throw err;
   }
 }
